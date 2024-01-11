@@ -1,0 +1,35 @@
+import re
+def extract_and_sum_numbers(file_path):
+  with open("sum_numbers.txt", 'r') as file:
+    content = file.read()
+# Use regular expression to find all numbers in the content
+numbers = re.findall(r'\b\d+\b', content)
+numbers=map(int,numbers)
+total_sum = sum(numbers)
+print(total_sum)
+
+
+import nltk
+from nltk import RegexpParser
+nltk.download('averaged_perceptron_tagger')
+
+# Sample sentence
+sample_sentence = "The big brown fox jumps over the lazy dog."
+
+# Define a simple grammar for chunking using regular expressions
+grammar = r"""NP: {<DT>?<JJ>*<NN>} VP: {<VB.*><NP|PP>*}"""
+
+# Tokenize the sentence
+tokens = nltk.word_tokenize(sample_sentence)
+
+# Perform part-of-speech tagging
+pos_tags = nltk.pos_tag(tokens)
+
+# Create a chunk parser using the defined grammar
+chunk_parser = RegexpParser(grammar)
+
+# Apply chunking
+chunks = chunk_parser.parse(pos_tags)
+
+# Display the chunks
+chunks.draw()
