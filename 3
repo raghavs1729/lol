@@ -1,0 +1,43 @@
+import nltk
+from nltk import word_tokenize
+from nltk.probability import FreqDist
+
+text="""There is a man on the hill, and I watched him with my telescope. There is a man on the hill, and he has a telescope. I’m on a hill, and I saw a man using my telescope."""
+words=word_tokenize(text)
+print(len(words))
+print(words)
+from nltk.corpus import stopwords
+Stopwords=stopwords.words("english")
+print(Stopwords)
+#removal of punctuation
+word_no_pun=[]
+for w in words:
+  if w.isalpha():
+    word_no_pun.append(w.lower())
+    print(word_no_pun)
+    print(len(word_no_pun))
+#removal of stop words
+clean_words=[]
+for w in word_no_pun:
+  if w not in Stopwords:
+    clean_words.append(w)
+    print(clean_words)
+    print(len(clean_words))
+fdist=FreqDist(clean_words)
+fdist.most_common(10)
+fdist.plot(10)
+
+
+
+
+
+
+
+import re
+def test(string):
+  merged = re.split(r"([ ,!]+)", string)
+  return [merged[::2], merged[1::2]]
+s = input("Enter a string with , separators")
+print("\nOriginal string:",s)
+print("Split the said string into 2 lists: words and separators:")
+print(test(s))
