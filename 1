@@ -1,0 +1,41 @@
+import re
+
+f=open("doc.txt","r")
+content=f.read()
+pattern="\d{2}[\-]\d{2}[\-]\d{4}"
+
+dates = re.findall(pattern, content)
+for date in dates:
+  if "-" in date:
+    day, month, year = map(int, date.split("-"))
+  else:
+    day, month, year = map(int, date.split("/"))
+if 1 <= day <= 31 and 1 <= month <= 12:
+  print(date)
+f.close()
+
+
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+nltk.download('punkt')
+nltk.download('stopwords')
+
+# Your example string
+example_string = """There is a man on the hill, and I watched him with my telescope. There is a man on the hill, and he has a telescope. I’m on a hill, and I saw a man using my telescope."""
+
+# Tokenize sentences
+sentences = nltk.sent_tokenize(example_string)
+print(sentences)
+
+# Create a Porter Stemmer
+stemmer = PorterStemmer()
+
+# Tokenize words, perform stemming, and remove stopwords for each sentence
+for i in range(len(sentences)):
+    words = nltk.word_tokenize(sentences[i])
+    words = [stemmer.stem(word) for word in words if word.lower() not in set(stopwords.words('english'))]
+    sentences[i] = ' '.join(words)
+
+    print(words)
+    print(sentences[i])
