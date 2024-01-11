@@ -1,0 +1,27 @@
+nums = []
+n = int(input("Enter the list size "))
+for i in range(0, n):
+  print("Enter number at index", i, )
+  item = int(input())
+  nums.append(item)
+  print("User list is ", nums)
+def test(nums):
+  return nums.count(19) == 2 and nums.count(5) >= 3
+  print("Original list:")
+  print(nums)
+print("Check two occurrences of nineteen and at least three occurrences of five in the said list:")
+print(test(nums))
+
+
+import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+#define a method
+def generate_N_grams(text,ngram=1):
+  words=[word for word in text.split(" ") if word not in set(stopwords.words('english'))]
+  print("Sentence after removing stopwords:",words)
+  temp=zip(*[words[i:] for i in range(0,ngram)])
+  ans=[' '.join(ngram) for ngram in temp]
+  return ans
+generate_N_grams("The sun rises in the east",2)
+
